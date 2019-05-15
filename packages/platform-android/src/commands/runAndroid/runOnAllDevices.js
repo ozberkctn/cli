@@ -36,6 +36,7 @@ function runOnAllDevices(
   adbPath: string,
 ) {
     const gradleArgs = [];
+console.log('ozberk');
   try {
     let tasks;
   if (args.variant) {
@@ -54,7 +55,7 @@ gradleArgs.push(
       packageNameWithSuffix += '.debug';
       gradleArgs.push('installDebug');
     }
-
+    console.log(packageNameWithSuffix);
     logger.info('Installing the app...');
     logger.debug(
       `Running command "cd android && ${cmd} ${gradleArgs.join(' ')}"`,
