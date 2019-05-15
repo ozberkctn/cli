@@ -36,7 +36,20 @@ function runOnAllDevices(
   adbPath: string,
 ) {
   try {
-    const tasks = args.tasks || ['install' + toPascalCase(args.variant)];
+    let tasks;
+  if (args.variant) {
+      if (args.variant == 'staging') packageNameWithSuffix += '.debug';
+        tasks = 'install' + args.variant[0].toUpperCase() + args.variant.slice(1),
+    } else if (args.flavor) {
+      console.warn(
+        chalk.yellow('--flavor has been deprecated. Use --variant instead'),
+      );
+        tasks = 'install' + args.flavor[0].toUpperCase() + args.flavor.slice(1);
+    } else {
+      packageNameWithSuffix += '.debug';
+      tasks = 'installDebug';
+    }
+
     const gradleArgs = getTaskNames(args.appFolder, tasks);
 
     logger.info('Installing the app...');
