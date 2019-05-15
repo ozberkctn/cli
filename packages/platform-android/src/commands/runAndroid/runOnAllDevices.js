@@ -35,6 +35,7 @@ function runOnAllDevices(
   packageName: string,
   adbPath: string,
 ) {
+    const gradleArgs = [];
   try {
     let tasks;
   if (args.variant) {
@@ -53,8 +54,6 @@ gradleArgs.push(
       packageNameWithSuffix += '.debug';
       gradleArgs.push('installDebug');
     }
-
-    const gradleArgs = getTaskNames(args.appFolder, tasks);
 
     logger.info('Installing the app...');
     logger.debug(
